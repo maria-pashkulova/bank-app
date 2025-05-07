@@ -20,11 +20,11 @@ export function LoginForm({ className, ...props }: React.ComponentPropsWithoutRe
                                     <Label htmlFor="email"><span className="text-red-500 font-bold">*</span> Потребител</Label>
                                     <p className="text-sm"><span className="text-red-500 font-bold">*</span> Задължителни полета</p>
                                 </div>
-                                <Input id="email" type="email" placeholder="m@example.com" required />
+                                <Input id="email" name="email" type="email" placeholder="ВЪведете имейл" required />
                             </div>
                             <div className="grid gap-2">
                                 <Label htmlFor="password"><span className="text-red-500 font-bold">*</span> Парола</Label>
-                                <Input id="password" type="password" required />
+                                <Input id="password" name="password" type="password" placeholder="ВЪведете парола" required />
                             </div>
                             <Button type="submit" className="w-full bg-blue-900">
                                 ВХОД
