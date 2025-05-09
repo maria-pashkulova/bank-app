@@ -7,8 +7,10 @@ import responseErrorMiddleware  from './middlewares/responseErrorMiddleware';
 const router = Router();
 //partial route middleware
 router.use('/users', userController);
-router.use('/dashboard', auth, (req, res) => {
-    res.json({ message: 'Prottected endpoint' });
+
+//TODO: implement controller for protected routes
+router.get('/dashboard', auth, (req, res) => {
+    res.json({ message: 'Protected endpoint' });
 });
 
 router.use((req, res) => {
