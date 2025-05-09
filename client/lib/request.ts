@@ -46,11 +46,6 @@ const request = async (
     }
   }
 
-  // 204 - no content -> logout server response and TODO:successful delete responses
-  if (response.status === 204) {
-    return {};
-  }
-
   try {
     // Try to parse the response body as JSON
     const result = await response.json();
