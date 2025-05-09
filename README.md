@@ -1,4 +1,4 @@
-# bank-app
+# Bank app
 ## How to run the project
 
 .env file with the following setup must be placed directly in the root of the ‘server’ folder
@@ -15,7 +15,8 @@ npm run dev
 ```
 ```
 cd server  
-npm install  
+npm install
+npx tsc 
 npm run server  
 
 ```
