@@ -1,5 +1,5 @@
 export default function DashboardRoute() {
     return (
-        <h1>Hello from dashboard</h1>
+        <h1>Hello from dashboard - Authenticated users only</h1>
     )
 }

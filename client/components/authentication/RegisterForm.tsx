@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button"
 import {
     Form,
     FormControl,
-    FormDescription,
     FormField,
     FormItem,
     FormLabel,
@@ -19,10 +18,22 @@ import { useForm } from 'react-hook-form';
 import { Textarea } from "../ui/textarea";
 import { Separator } from "../ui/separator";
 import { z } from "zod";
+import { useContext } from "react";
+import AuthContext from "@/contexts/authContext";
+import { toast } from "sonner";
+import { useRouter } from 'next/navigation'
+import { CustomError } from "@/interfaces/customTypes";
+import { SubmitButton } from "../general/SubmitButton";
 
 
 
 const RegisterForm = () => {
+
+
+    const auth = useContext(AuthContext);
+    const router = useRouter();
+
+
     const form = useForm({
         resolver: zodResolver(RegisterSchema),
         defaultValues: {
@@ -36,10 +47,27 @@ const RegisterForm = () => {
             username: '',
             password: '',
             confirmPassword: '',
-        }
+        },
+        mode: 'onChange'
     })
-    const onSubmit = (value: z.infer<typeof RegisterSchema>) => {
-        console.log('submitted');
+    //Controlled and validated form using React hook forms and Zod
+    const onSubmit = async (data: z.infer<typeof RegisterSchema>) => {
+
+        try {
+            await auth?.registerSubmitHandler(data)
+            toast.success("Регистрацията е успешна!");
+            router.push('/dashboard');
+        } catch (error) {
+            const customError = error as CustomError;
+            //409 - user with the same username exists
+            if (customError.status === 409) {
+                toast.error(customError.message);
+            } else {
+                //Error connecting with server or other errors
+                toast.error("Нещо се обърка! Опитайте по-късно!");
+            }
+        }
+
 
     }
     return (
@@ -223,9 +251,13 @@ const RegisterForm = () => {
                                 Необходимо е да запомните потребителското си име и парола, които току-що въведохте. След като потвърдите регистрацията в банката, те ще ви служат за вход във Виртуален банков клон (e-fibank)
                             </p>
 
-                            <Button type="submit" className="w-full bg-blue-900 uppercase cursor-pointer">
-                                Изпратете искане за регистрация
-                            </Button>
+                            <SubmitButton
+                                isLoading={form.formState.isSubmitting}
+                                loadingText="Изпращане на искане за регистрация"
+                                initialText="Изпратете искане за регистрация"
+                                className="w-full bg-blue-900 uppercase cursor-pointer">
+
+                            </SubmitButton>
                         </div>
                     </form>
 
