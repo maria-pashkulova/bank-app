@@ -1,7 +1,6 @@
 "use client"
 import TooltipInfo from "../general/TooltipInfo";
 import { Input } from "../ui/input";
-import { Button } from "@/components/ui/button"
 import {
     Form,
     FormControl,
@@ -12,7 +11,7 @@ import {
 } from "@/components/ui/form"
 
 import CardWrapper from "./CardWrapper";
-import { RegisterSchema } from "@/schemas";
+import { RegisterSchema } from "@/schemas/userSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from 'react-hook-form';
 import { Textarea } from "../ui/textarea";
@@ -258,6 +257,7 @@ const RegisterForm = () => {
                                 className="w-full bg-blue-900 uppercase cursor-pointer">
 
                             </SubmitButton>
+
                         </div>
                     </form>
 
