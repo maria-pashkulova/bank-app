@@ -1,6 +1,11 @@
+'use client'
 import RegisterForm from "@/components/authentication/RegisterForm";
+import isGuest from "@/route-guards/isGuest";
 
-export default function RegisterPage() {
+
+function RegisterPage() {
+
+
     return (
         <div>
             <main className="my-10">
@@ -10,3 +15,5 @@ export default function RegisterPage() {
 
     )
 }
+export default isGuest(RegisterPage);
+
