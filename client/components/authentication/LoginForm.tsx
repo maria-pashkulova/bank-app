@@ -1,8 +1,6 @@
 "use client"
-import { Button } from "@/components/ui/button"
 import { CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import CardWrapper from "./CardWrapper"
 import { useContext } from "react"
 import AuthContext from "@/contexts/authContext"

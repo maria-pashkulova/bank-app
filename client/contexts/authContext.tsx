@@ -1,4 +1,4 @@
-import { createContext, ReactNode } from "react";
+import { createContext, ReactNode} from "react";
 import * as userService from '../services/userService';
 import usePersistedState from "../hooks/usePersistedState";
 
@@ -6,9 +6,10 @@ interface AuthContextType {
     loginSubmitHandler: (userData: any) => Promise<void>;
     registerSubmitHandler: (userData: any) => Promise<void>;
     logoutHandler: () => void;
-    userId?: string;
-    name?: string;
-    accessToken?: string;
+    userId: string;
+    isAuthenticated: boolean;
+    name: string;
+    accessToken: string;
 }
 
 
@@ -17,7 +18,7 @@ AuthContext.displayName = 'AuthContext';
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const [auth, setAuth] = usePersistedState('user', {});
-
+ 
 
     const loginSubmitHandler = async (userData: any) => {
         const result = await userService.login(userData);
@@ -38,6 +39,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         registerSubmitHandler,
         logoutHandler,
         userId: auth._id,
+        isAuthenticated: !!auth._id,
         name: auth.name,
         accessToken: auth.accessToken
     };

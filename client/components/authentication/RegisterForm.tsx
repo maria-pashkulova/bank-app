@@ -53,9 +53,10 @@ const RegisterForm = () => {
     const onSubmit = async (data: z.infer<typeof RegisterSchema>) => {
 
         try {
-            await auth?.registerSubmitHandler(data)
-            toast.success("Регистрацията е успешна!");
+            await auth?.registerSubmitHandler(data);
             router.push('/dashboard');
+            toast.success("Регистрацията е успешна!");
+
         } catch (error) {
             const customError = error as CustomError;
             //409 - user with the same username exists
